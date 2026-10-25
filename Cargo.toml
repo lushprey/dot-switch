@@ -70,40 +70,26 @@ lto = "thin"
 codegen-units = 1
 strip = true
 
-# ============================================================================
-# cargo-binstall — supports `cargo binstall dot-switch` (binary install)
-# https://github.com/cargo-bins/cargo-binstall
-# ============================================================================
+# The profile that 'dist' will build with
+[profile.dist]
+inherits = "release"
+lto = "thin"
+
+# cargo-binstall — precompiled binary install support.
+# URL layout must match the artifact names produced by cargo-dist:
+#   dot-switch-v{version}-{target}.tar.gz  (binaries at archive root)
+# (Windows artifacts are .zip — Windows users should use install.ps1 instead.)
 [package.metadata.binstall]
-pkg-url = "{ repo }/releases/download/v{ version }/dot-switch-v{ version }-{ target }-musl{ archive-suffix }"
-bin-dir = "dot-switch-v{ version }-{ target }-musl/dot-switch"
+pkg-url = "{ repo }/releases/download/v{ version }/dot-switch-v{ version }-{ target }{ archive-suffix }"
+bin-dir = "{ bin }{ binary-ext }"
 pkg-fmt = "tgz"
 disabled-strategies = ["quick-install", "compile"]
 
-# ============================================================================
-# cargo-dist — automated cross-compiled releases via GitHub Actions
-# https://github.com/axodotdev/cargo-dist
-# ============================================================================
-[workspace.metadata.dist]
-cargo-dist-version = "0.25.1"
-ci = "github"
-installers = ["shell", "homebrew", "msi", "npm"]
-tap = "lushprey/homebrew-tap"
-publish-preferences = "npm"
-targets = [
-    "x86_64-unknown-linux-musl",
-    "aarch64-unknown-linux-musl",
-    "x86_64-unknown-linux-gnu",
-    "aarch64-unknown-linux-gnu",
-    "x86_64-apple-darwin",
-    "aarch64-apple-darwin",
-    "x86_64-pc-windows-msvc",
-]
-ci-repository = "lushprey/dot-switch"
-install-updater = ["shell", "npm"]
-github-organization = "lushprey"
-github-repository = "dot-switch"
-pr-run-mode = "plan"
+[package.metadata.binstall.formats]
+unix-archive = ".tar.gz"
 
-[workspace]
-members = ["."]
+[package.metadata.wix]
+upgrade-guid = "889AA458-5B92-4801-8CA7-A68C539A5990"
+path-guid = "732BDE16-99F4-4AC4-A504-F8DBEE00A7B6"
+license = false
+eula = false
