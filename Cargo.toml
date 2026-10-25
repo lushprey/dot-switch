@@ -1,0 +1,109 @@
+[package]
+name = "dot-switch"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.74"
+description = "Swap ~/.config files between named profiles via symlinks. Built for Hyprland/Quickshell, generic for everything."
+license = "MIT"
+authors = ["dot-switch contributors"]
+homepage = "https://github.com/lushprey/dot-switch"
+repository = "https://github.com/lushprey/dot-switch"
+readme = "README.md"
+keywords = ["dotfiles", "hyprland", "quickshell", "config", "profile"]
+categories = ["command-line-utilities", "config"]
+exclude = [
+    "/.github",
+    "/packaging",
+    "/assets",
+    "/flake.nix",
+    "/flake.lock",
+    "/dist",
+    "/target",
+]
+
+[[bin]]
+name = "dot-switch"
+path = "src/main.rs"
+
+[lib]
+name = "dot_switch"
+path = "src/lib.rs"
+
+[dependencies]
+# CLI parsing (auto-provides --help / -h)
+clap = { version = "4.5", features = ["derive", "cargo", "wrap_help"] }
+clap_complete = "4.5"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+
+# Paths / XDG
+dirs = "5"
+
+# Errors / logging
+anyhow = "1"
+thiserror = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+
+# TUI
+ratatui = "0.28"
+crossterm = "0.28"
+
+# Glob matching for reload_on_files
+glob = "0.3"
+
+# Misc utils
+shellexpand = "3"
+chrono = { version = "0.4", default-features = false, features = ["clock"] }
+uuid = { version = "1", features = ["v4"] }
+
+[dev-dependencies]
+tempfile = "3"
+assert_cmd = "2"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+strip = true
+
+# ============================================================================
+# cargo-binstall — supports `cargo binstall dot-switch` (binary install)
+# https://github.com/cargo-bins/cargo-binstall
+# ============================================================================
+[package.metadata.binstall]
+pkg-url = "{ repo }/releases/download/v{ version }/dot-switch-v{ version }-{ target }-musl{ archive-suffix }"
+bin-dir = "dot-switch-v{ version }-{ target }-musl/dot-switch"
+pkg-fmt = "tgz"
+disabled-strategies = ["quick-install", "compile"]
+
+# ============================================================================
+# cargo-dist — automated cross-compiled releases via GitHub Actions
+# https://github.com/axodotdev/cargo-dist
+# ============================================================================
+[workspace.metadata.dist]
+cargo-dist-version = "0.25.1"
+ci = "github"
+installers = ["shell", "homebrew", "msi", "npm"]
+tap = "lushprey/homebrew-tap"
+publish-preferences = "npm"
+targets = [
+    "x86_64-unknown-linux-musl",
+    "aarch64-unknown-linux-musl",
+    "x86_64-unknown-linux-gnu",
+    "aarch64-unknown-linux-gnu",
+    "x86_64-apple-darwin",
+    "aarch64-apple-darwin",
+    "x86_64-pc-windows-msvc",
+]
+ci-repository = "lushprey/dot-switch"
+install-updater = ["shell", "npm"]
+github-organization = "lushprey"
+github-repository = "dot-switch"
+pr-run-mode = "plan"
+
+[workspace]
+members = ["."]

@@ -1,0 +1,32 @@
+# .SRCINFO template for dot-switch-bin (AUR)
+#
+# Generated/refreshed by CI on every release. If you ever need to regen it
+# manually, run `makepkg --printsrcinfo > .SRCINFO` after editing PKGBUILD.
+#
+# Tokens (substituted by .github/workflows/publish.yml):
+#   %%VERSION%%      — version without 'v' prefix
+#   %%SHA_X86_64%%   — sha256sum of x86_64 musl tarball
+#   %%SHA_AARCH64%%  — sha256sum of aarch64 musl tarball
+
+pkgbase = dot-switch-bin
+	pkgdesc = Swap ~/.config files between named profiles via symlinks. Built for Hyprland/Quickshell, generic for everything.
+	pkgver = %%VERSION%%
+	pkgrel = 1
+	url = https://github.com/lushprey/dot-switch
+	arch = x86_64
+	arch = aarch64
+	license = MIT
+	depends = gcc-libs
+	depends = zlib
+	provides = dot-switch
+	conflicts = dot-switch
+	conflicts = dot-switch-git
+	conflicts = dot-switch-appimage
+	options = !lto
+	options = !strip
+	source_x86_64 = https://github.com/lushprey/dot-switch/releases/download/v%%VERSION%%/dot-switch-v%%VERSION%%-x86_64-unknown-linux-musl.tar.gz
+	sha256sums_x86_64 = %%SHA_X86_64%%
+	source_aarch64 = https://github.com/lushprey/dot-switch/releases/download/v%%VERSION%%/dot-switch-v%%VERSION%%-aarch64-unknown-linux-musl.tar.gz
+	sha256sums_aarch64 = %%SHA_AARCH64%%
+
+pkgname = dot-switch-bin

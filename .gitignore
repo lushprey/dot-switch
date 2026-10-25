@@ -1,0 +1,34 @@
+# --- Rust / cargo ---
+/target
+/**/target
+**/*.rs.bk
+*.pdb
+*.rmeta
+
+# --- cargo-dist output ---
+/dist/
+*.tar.gz
+*.zip
+*.sha256
+
+# --- Nix ---
+/result
+/result-*
+.direnv/
+.envrc
+
+# --- Editor / IDE ---
+/.idea/
+/.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# --- OS ---
+Thumbs.db
+
+# --- Local test profiles / state ---
+/.dot-switch-local/
+/profiles-test/
+/state-test.json
