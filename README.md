@@ -253,7 +253,6 @@ GitHub Release. The complete infrastructure lives in this repository:
 |---|---|---|
 | **crates.io** | `Cargo.toml` + `.github/workflows/publish.yml` | — |
 | **GitHub Releases** | `Cargo.toml` `[workspace.metadata.dist]` + `.github/workflows/release.yml` | [cargo-dist docs](https://opensource.axo.dev/cargo-dist/) |
-| **AUR `dot-switch-bin`** | `packaging/aur/PKGBUILD` | [`packaging/aur/README.md`](packaging/aur/README.md) |
 | **Homebrew tap** | `.github/workflows/publish.yml` (auto-generated Formula) | — |
 | **Nix flake** | `flake.nix` | — |
 
