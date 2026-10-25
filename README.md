@@ -9,14 +9,6 @@
 
 Pick **one** channel. The official builds come from GitHub Releases and are identical across every channel.
 
-### AUR (Arch / EndeavourOS / CachyOS)
-
-```bash
-paru -S dot-switch-bin
-# or
-yay -S dot-switch-bin
-```
-
 ### Homebrew tap (Linux + macOS)
 
 ```bash
