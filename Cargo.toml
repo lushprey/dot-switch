@@ -80,13 +80,13 @@ lto = "thin"
 #   dot-switch-v{version}-{target}.tar.gz  (binaries at archive root)
 # (Windows artifacts are .zip — Windows users should use install.ps1 instead.)
 [package.metadata.binstall]
-pkg-url = "{ repo }/releases/download/v{ version }/dot-switch-v{ version }-{ target }{ archive-suffix }"
-bin-dir = "{ bin }{ binary-ext }"
-pkg-fmt = "tgz"
+pkg-url = "{ repo }/releases/download/v{ version }/{ name }-{ target }{ archive-suffix }"
+pkg-fmt = "txz"
+bin-dir = "{ name }-{ target }/{ bin }{ binary-ext }"
 disabled-strategies = ["quick-install", "compile"]
 
-[package.metadata.binstall.formats]
-unix-archive = ".tar.gz"
+[package.metadata.binstall.overrides.x86_64-pc-windows-msvc]
+pkg-fmt = "zip"
 
 [package.metadata.wix]
 upgrade-guid = "889AA458-5B92-4801-8CA7-A68C539A5990"
