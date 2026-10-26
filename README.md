@@ -12,6 +12,7 @@ Pick **one** channel. The official builds come from GitHub Releases and are iden
 ### Homebrew tap (Linux + macOS)
 
 ```bash
+brew trust lushprey/tap
 brew tap lushprey/tap
 brew install dot-switch
 ```
